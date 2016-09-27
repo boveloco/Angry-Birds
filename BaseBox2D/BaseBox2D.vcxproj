@@ -70,6 +70,9 @@
     <TargetName>$(ProjectName)_debug</TargetName>
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>true</GenerateManifest>
+    <IncludePath>E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\src;E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\libs;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\libs;$(LibraryPath)</LibraryPath>
+    <SourcePath>E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\src;E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\libs;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>bin\</OutDir>
@@ -77,6 +80,9 @@
     <TargetName>$(ProjectName)_debug</TargetName>
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>true</GenerateManifest>
+    <IncludePath>E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\src;E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\libs</IncludePath>
+    <LibraryPath>E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\src;E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\libs</LibraryPath>
+    <SourcePath>E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\src;E:\Documentos\of_v0.9.3_vs_release\addons\ofxBox2d\libs;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>bin\</OutDir>
