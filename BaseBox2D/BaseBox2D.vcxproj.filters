@@ -172,6 +172,11 @@
     <ClCompile Include="..\..\..\addons\ofxBox2d\libs\triangle\del_impl.cpp">
       <Filter>addons\ofxBox2d\libs\triangle</Filter>
     </ClCompile>
+    <ClCompile Include="src\MathVinicius\AffineTransform.cpp" />
+    <ClCompile Include="src\MathVinicius\MathUtil.cpp" />
+    <ClCompile Include="src\MathVinicius\Matrix3.cpp" />
+    <ClCompile Include="src\MathVinicius\Vector2D.cpp" />
+    <ClCompile Include="src\MathVinicius\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -413,6 +418,11 @@
     <ClInclude Include="..\..\..\addons\ofxBox2d\libs\triangle\triangle_impl.hpp">
       <Filter>addons\ofxBox2d\libs\triangle</Filter>
     </ClInclude>
+    <ClInclude Include="src\MathVinicius\AffineTransform.h" />
+    <ClInclude Include="src\MathVinicius\MathUtil.h" />
+    <ClInclude Include="src\MathVinicius\Matrix3.h" />
+    <ClInclude Include="src\MathVinicius\Vector2D.h" />
+    <ClInclude Include="src\MathVinicius\Vector3D.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

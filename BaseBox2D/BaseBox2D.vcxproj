@@ -277,6 +277,11 @@
     <ClCompile Include="..\..\..\addons\ofxBox2d\src\ofxBox2dPolygon.cpp" />
     <ClCompile Include="..\..\..\addons\ofxBox2d\src\ofxBox2dRect.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MathVinicius\AffineTransform.cpp" />
+    <ClCompile Include="src\MathVinicius\MathUtil.cpp" />
+    <ClCompile Include="src\MathVinicius\Matrix3.cpp" />
+    <ClCompile Include="src\MathVinicius\Vector2D.cpp" />
+    <ClCompile Include="src\MathVinicius\Vector3D.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -344,6 +349,11 @@
     <ClInclude Include="..\..\..\addons\ofxBox2d\src\ofxBox2dRect.h" />
     <ClInclude Include="..\..\..\addons\ofxBox2d\src\ofxBox2dRender.h" />
     <ClInclude Include="..\..\..\addons\ofxBox2d\src\ofxBox2dUtils.h" />
+    <ClInclude Include="src\MathVinicius\AffineTransform.h" />
+    <ClInclude Include="src\MathVinicius\MathUtil.h" />
+    <ClInclude Include="src\MathVinicius\Matrix3.h" />
+    <ClInclude Include="src\MathVinicius\Vector2D.h" />
+    <ClInclude Include="src\MathVinicius\Vector3D.h" />
     <ClInclude Include="src\ofApp.h" />
   </ItemGroup>
   <ItemGroup>
