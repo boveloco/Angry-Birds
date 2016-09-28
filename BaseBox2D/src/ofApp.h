@@ -36,5 +36,6 @@ public:
     vector      <shared_ptr<ofxBox2dJoint> >  joints;  // joints
     
     
-    bool drag = false; // if the point was draged
+    bool release = false;   // if mouse release
+    float size = 8;         // projectile size
 };

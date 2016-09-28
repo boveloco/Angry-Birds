@@ -12,7 +12,10 @@ void ofApp::setup(){
     box2d.setGravity(0, 15);
     box2d.setFPS(60.0);
     box2d.registerGrabbing();
+    box2d.createBounds();
     
+    anchor.fixture.filter.maskBits = 0x0000;
+    anchor2.fixture.filter.maskBits = 0x0000;
     anchor.setup(box2d.getWorld(), 100, ofGetHeight() - ofGetHeight() / 3 - 25, 4);
     anchor2.setup(box2d.getWorld(), 135, ofGetHeight() - ofGetHeight() / 3 + 35, 4);
     
@@ -22,6 +25,7 @@ void ofApp::setup(){
     projectile.get()->setPhysics(30.0, 0.58, 0.3);
     projectiles.push_back(projectile);
     
+    circle.fixture.filter.maskBits= 0x0000;
     circle.setPhysics(3.0, 0.58, 0.1);
     circle.setup(box2d.getWorld(), 117,  ofGetHeight() - ofGetHeight() / 3 + 10 , 8);
     
@@ -47,14 +51,14 @@ void ofApp::setup(){
 void ofApp::update(){
     box2d.update();
     
-    if (drag) {
+    if (release) {
         if (circle.getPosition().x >= 110) {
             addProjectile();
-            drag = false;
+            release = false;
         }
     }
     else if (circle.getPosition().x <= 100) {
-        drag = !drag;
+        release = true;
     }
     
 }
@@ -116,7 +120,7 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-    
+ 
 }
 
 //--------------------------------------------------------------
@@ -146,10 +150,11 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 void ofApp::addProjectile(){
     float multiply = 120;
+    
     shared_ptr<ofxBox2dCircle> projectile = shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle);
     projectile.get()->setPhysics(3.0, 0.58, 1);
     b2Vec2 vel = circle.body->GetLinearVelocity();
-    projectile.get()->setup(box2d.getWorld(), circle.getPosition().x + 10, circle.getPosition().y - 10 , 8);
+    projectile.get()->setup(box2d.getWorld(), circle.getPosition().x + 10, circle.getPosition().y - size * 0.5 , size);
     projectile.get()->body->ApplyForceToCenter(b2Vec2(multiply * vel.x, multiply * vel.y), true);
     //projectile.get()->body->SetLinearVelocity(vel);
     projectiles.push_back(projectile);
