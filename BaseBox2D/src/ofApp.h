@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
+#include "Sprite.h"
 
 class ofApp : public ofBaseApp{
     
@@ -34,7 +35,9 @@ public:
     vector      <shared_ptr<ofxBox2dPolygon> > targets; // circulos
     vector      <shared_ptr<ofxBox2dCircle> > projectiles; // circulos
     vector      <shared_ptr<ofxBox2dJoint> >  joints;  // joints
+    ofImage red;
     
+    Sprite  s;
     
     bool release = false;   // if mouse release
     float size = 8;         // projectile size
