@@ -1,7 +1,8 @@
 #include "ofApp.h"
-
+string path = "/Users/projecao/workspace/of_v0.9.3_osx_release/addons/ofxBox2d/example-Joint/img/red.png";
 //--------------------------------------------------------------
 void ofApp::setup(){
+
     
     ofSetVerticalSync(true);
     ofBackgroundHex(0xfdefc2);
@@ -19,25 +20,9 @@ void ofApp::setup(){
     anchor.setup(box2d.getWorld(), 100, ofGetHeight() - ofGetHeight() / 3 - 25, 4);
     anchor2.setup(box2d.getWorld(), 135, ofGetHeight() - ofGetHeight() / 3 + 35, 4);
     
-    
-    
-    //projetil
-    shared_ptr<ofxBox2dCircle> projectile = shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle);
-    projectile.get()->setPhysics(30.0, 0.58, 0.3);
-    projectiles.push_back(projectile);
-    
-    //sprite red
-    //red.load("/Users/projecao/workspace/of_v0.9.3_osx_release/addons/ofxBox2d/example-Joint/img/red.png");
-    //red.resize(size * 5, size * 5);
-    
-    //circle.fixture.filter.maskBits= 0x0000;
-    //circle.setPhysics(3.0, 0.58, 0.1);
-    //circle.setup(box2d.getWorld(), 117,  ofGetHeight() - ofGetHeight() / 3 + 10 , 8);
-    
     s.setPhysics(3.0, 0.58, 0.1);
     s.Setup(box2d.getWorld(), 117, ofGetHeight() - ofGetHeight() / 3 + 10 , 15);
-    s.setImage("/Users/projecao/workspace/of_v0.9.3_osx_release/addons/ofxBox2d/example-Joint/img/red.png");
-    s.getImage()->resize(50,50);
+    s.setImage(path);
     
     
     //joints
@@ -93,11 +78,10 @@ void ofApp::draw(){
     
     ofFill();
     ofSetHexColor(0x0);
-    circle.draw();
     
     for (int i = 0; i < projectiles.size(); i++){
         ofSetHexColor(0x0);
-        projectiles[i].get()->draw();
+        projectiles[i].get()->Draw();
     }
     
     for (int i = 0; i < joints.size(); i++) {
@@ -167,13 +151,19 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 void ofApp::addProjectile(){
     float multiply = 200;
     
-    shared_ptr<ofxBox2dCircle> projectile = shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle);
+    shared_ptr<Sprite> projectile = shared_ptr<Sprite>(new Sprite);
     projectile.get()->setPhysics(3.0, 0.58, 1);
     b2Vec2 vel = s.body->GetLinearVelocity();
-    projectile.get()->setup(box2d.getWorld(), s.getPosition().x + 10, s.getPosition().y - size * 0.5 , size);
+    projectile.get()->setImage(path);
+
+    
+    projectile.get()->Setup(box2d.getWorld(), s.getPosition().x + 10, s.getPosition().y - size * 0.5 , size);
     projectile.get()->body->ApplyForceToCenter(b2Vec2(multiply * vel.x, multiply * vel.y), true);
-    //projectile.get()->body->SetLinearVelocity(vel);
     projectiles.push_back(projectile);
+    
+    char* n = new char();
+    sprintf(n, "%f", projectile.get()->getRotation());
+    ofLog(OF_LOG_NOTICE, n);
     
     s.body->SetLinearVelocity(b2Vec2(0,0));
 }

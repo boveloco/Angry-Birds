@@ -53,6 +53,7 @@ void Sprite::Setup(b2World *b2dworld, float x, float y, float radius, std::strin
 void Sprite::setImage(std::string imageFile){
     this->image = new ofImage();
     this->image->load(ofFile(std::filesystem::path(imageFile.c_str())));
+    this->image->resize(50, 50);
 }
 
 void Sprite::getRadius(){
