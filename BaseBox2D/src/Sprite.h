@@ -28,9 +28,16 @@ public:
     void getRadius();
     void Draw();
     ofImage* getImage();
+    void setSize(float x, float y);
+    
 private:
     ofImage* image;
     float radius = 15;
+    /**
+     * Cod Vinicius Godoy:
+     *
+     */
+    ofMatrix4x4 affineRotation(float radians);
 };
 
 

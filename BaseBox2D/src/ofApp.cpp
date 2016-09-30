@@ -1,8 +1,11 @@
 #include "ofApp.h"
-string path = "/Users/projecao/workspace/of_v0.9.3_osx_release/addons/ofxBox2d/example-Joint/img/red.png";
+string path  = "img/red.png";
+int sizex = 30;
+int sizey = 100;
+int posx = 695;
+int posy = 414;
 //--------------------------------------------------------------
 void ofApp::setup(){
-
     
     ofSetVerticalSync(true);
     ofBackgroundHex(0xfdefc2);
@@ -23,7 +26,7 @@ void ofApp::setup(){
     s.setPhysics(3.0, 0.58, 0.1);
     s.Setup(box2d.getWorld(), 117, ofGetHeight() - ofGetHeight() / 3 + 10 , 15);
     s.setImage(path);
-    
+    s.setSize(50, 50);
     
     //joints
     shared_ptr<ofxBox2dJoint> joint = shared_ptr<ofxBox2dJoint>(new ofxBox2dJoint);
@@ -40,14 +43,46 @@ void ofApp::setup(){
     wall1.setup(box2d.getWorld(), ofRectangle(ofPoint(ofGetWidth(), ofGetHeight() * 0.5), 30, ofGetHeight() ));
     wall2.setup(box2d.getWorld(), ofRectangle(ofPoint(0, ofGetHeight() * 0.5), 30, ofGetHeight() ));
     
+    //castelo
+    this->createWall(posx, posy , sizex, sizey);
+    this->createWall(posx + sizey, posy , sizex, sizey);
     
+    this->createWall(posx, posy - sizex , sizey, sizex);
+    this->createWall(posx + sizey, posy - sizex , sizey, sizex);
+    //primeiro castelo pronto
+    posx += 202;
+    
+    this->createWall(posx, posy , sizex, sizey);
+    this->createWall(posx + sizey, posy , sizex, sizey);
+    
+    this->createWall(posx, posy - sizex , sizey, sizex);
+    this->createWall(posx + sizey, posy - sizex , sizey, sizex);
+    //segundo castelo pronto
+    posy -= (sizey + sizex);
+    posx -= 50;
+    
+    this->createWall(posx, posy , sizex, sizey);
+    this->createWall(posx + sizey, posy , sizex, sizey);
+    
+    this->createWall(posx, posy - sizex , sizey, sizex);
+    this->createWall(posx + sizey, posy - sizex , sizey, sizex);
+    
+    this->createWall(posx - sizey , posy , sizex, sizey);
+    this->createWall(posx - sizey, posy - sizex , sizey, sizex);
+    //terceiro castelo pronto
+    posy -= (sizey + sizex);
+    posx -= 50;
+    this->createWall(posx, posy , sizex, sizey);
+    this->createWall(posx + sizey, posy , sizex, sizey);
+    
+    this->createWall(posx, posy - sizex , sizey, sizex);
+    this->createWall(posx + sizey, posy - sizex , sizey, sizex);
     
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     box2d.update();
-    
     
     if (release) {
         if (s.getPosition().x >= 110) {
@@ -63,9 +98,6 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    s.Draw();
-    //red.draw(circle.getPosition().x - red.getWidth()* 0.5 , circle.getPosition().y - red.getHeight() * 0.5);
-    
     //grouds and walls
     ground.draw();
     ground2.draw();
@@ -75,12 +107,19 @@ void ofApp::draw(){
     ofSetHexColor(0x0);
     anchor.draw();
     anchor2.draw();
-    
     ofFill();
-    ofSetHexColor(0x0);
+    
+    ofSetHexColor(0xffffff);
+    s.Draw();
+    
+    for (int i = 0; i < walls.size(); i++){
+        ofSetHexColor(0x0000ff);
+        walls[i].get()->draw();
+//        std::cout<< walls[i].get()->getPosition() << std::endl;
+    }
     
     for (int i = 0; i < projectiles.size(); i++){
-        ofSetHexColor(0x0);
+        ofSetHexColor(0xffffff);
         projectiles[i].get()->Draw();
     }
     
@@ -96,6 +135,7 @@ void ofApp::keyPressed(int key){
     if (key == 'n'){
         addProjectile();
     }
+    
 }
 
 //--------------------------------------------------------------
@@ -155,8 +195,8 @@ void ofApp::addProjectile(){
     projectile.get()->setPhysics(3.0, 0.58, 1);
     b2Vec2 vel = s.body->GetLinearVelocity();
     projectile.get()->setImage(path);
-
-    
+    projectile.get()->setSize(50, 50);
+    projectile.get()->setFixedRotation(true);
     projectile.get()->Setup(box2d.getWorld(), s.getPosition().x + 10, s.getPosition().y - size * 0.5 , size);
     projectile.get()->body->ApplyForceToCenter(b2Vec2(multiply * vel.x, multiply * vel.y), true);
     projectiles.push_back(projectile);
@@ -164,6 +204,12 @@ void ofApp::addProjectile(){
     char* n = new char();
     sprintf(n, "%f", projectile.get()->getRotation());
     ofLog(OF_LOG_NOTICE, n);
+}
+void ofApp::createWall(float x, float y, float w, float h){
     
-    s.body->SetLinearVelocity(b2Vec2(0,0));
+    shared_ptr<ofxBox2dRect> wall = shared_ptr<ofxBox2dRect>(new ofxBox2dRect);
+    wall.get()->setPhysics(3.0, 0.58, 1.5);
+    wall.get()->setFixedRotation(false);
+    wall.get()->setup(box2d.getWorld(), x, y, w, h);
+    this->walls.push_back(wall);
 }
